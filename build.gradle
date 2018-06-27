@@ -1,0 +1,79 @@
+buildscript {
+    ext.kotlin_version = '1.2.21'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+plugins {
+    id 'org.hidetake.swagger.generator' version '2.12.0'
+}
+
+group 'io.github.yuokada'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'kotlin'
+//apply plugin: 'org.hidetake.swagger.generator' version '2.12.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    swaggerCodegen 'io.swagger:swagger-codegen-cli:2.3.1'
+    swaggerUI 'org.webjars:swagger-ui:3.10.0'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+swaggerSources {
+    petstore {
+        inputFile = file('src/main/resources/swagger/v1.yaml')
+        code {
+            language = 'spring'
+            configFile = file('src/main/resources/swagger/config.json')
+            outputDir = file('output')
+            // Generate only models and controllers
+//            components = ['invokes', 'configs', 'models', 'apis']
+            dependsOn validation
+
+            doLast {
+                copy {
+//                    from code.outputDir + '/src/main/java'
+                    from "${code.outputDir}/src/main/java"
+                    // from 'output/src/main/java/io/github/yuokada/swagger/demoapi/impl/*.java'
+                    into 'src/java'
+                }
+            }
+        }
+        ui {
+            doLast {
+                copy {
+                    from 'index.html'
+                    into outputDir
+                }
+            }
+        }
+    }
+}
+
+// ref: https://github.com/int128/gradle-swagger-generator-plugin
+// ref: https://github.com/int128/gradle-swagger-generator-plugin/blob/c95c62deba438a4ee10206fee601e46accf8f8c9/acceptance-test/code-generator/build.gradle#L28-L30
