@@ -4,7 +4,7 @@
   "invokerPackage": "io.github.yuokada.swagger.demoapi",
   "apiPackage": "io.github.yuokada.swagger.demoapi.impl",
   "modelPackage": "io.github.yuokada.swagger.demoapi.model",
-  "configPackage": "io.github.yuokada.swagger.demoapi",
+  "configPackage": "io.github.yuokada.swagger.demoapi.config",
   "serializableModel": false,
   "library": "spring-boot",
   "useOptional": true,
