@@ -52,12 +52,11 @@ swaggerSources {
             configFile = file('src/main/resources/swagger/config.json')
             outputDir = file('output')
             // Generate only models and controllers
-//            components = ['invokes', 'configs', 'models', 'apis']
+            components = ['models', 'apis']
             dependsOn validation
 
             doLast {
                 copy {
-//                    from code.outputDir + '/src/main/java'
                     from "${code.outputDir}/src/main/java"
                     // from 'output/src/main/java/io/github/yuokada/swagger/demoapi/impl/*.java'
                     into 'src/java'
