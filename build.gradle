@@ -57,9 +57,9 @@ swaggerSources {
 
             doLast {
                 copy {
-                    from "${code.outputDir}/src/main/java/io/github/yuokada/swagger/demoapi/model"
+                    from "${code.outputDir}/src/main/java/io/github/yuokada/swagger/demoapi"
                     // from 'output/src/main/java/io/github/yuokada/swagger/demoapi/impl/*.java'
-                    into 'src/main/java/io/github/yuokada/swagger/demoapi/model'
+                    into "src/main/java/io/github/yuokada/swagger/demoapi"
                 }
             }
         }
