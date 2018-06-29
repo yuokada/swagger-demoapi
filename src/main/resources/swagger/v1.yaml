@@ -37,6 +37,10 @@ paths:
       summary: "Add a new pet to the store"
       description: ""
       operationId: "addPet"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
       parameters:
       - in: "body"
         name: "body"
@@ -57,6 +61,10 @@ paths:
       summary: "Update an existing pet"
       description: ""
       operationId: "updatePet"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
       parameters:
       - in: "body"
         name: "body"
@@ -82,6 +90,8 @@ paths:
       summary: "Finds Pets by status"
       description: "Multiple status values can be provided with comma separated strings"
       operationId: "findPetsByStatus"
+      produces:
+      - "application/json"
       parameters:
       - name: "status"
         in: "query"
@@ -116,6 +126,8 @@ paths:
       summary: "Finds Pets by tags"
       description: "Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing."
       operationId: "findPetsByTags"
+      produces:
+      - "application/json"
       parameters:
       - name: "tags"
         in: "query"
@@ -146,6 +158,8 @@ paths:
       summary: "Find pet by ID"
       description: "Returns a single pet"
       operationId: "getPetById"
+      produces:
+      - "application/json"
       parameters:
       - name: "petId"
         in: "path"
@@ -170,6 +184,10 @@ paths:
       summary: "Updates a pet in the store with form data"
       description: ""
       operationId: "updatePetWithForm"
+      # consumes:
+      # - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
       parameters:
       - name: "petId"
         in: "path"
@@ -200,6 +218,8 @@ paths:
       summary: "Deletes a pet"
       description: ""
       operationId: "deletePet"
+      produces:
+      - "application/json"
       parameters:
       - name: "api_key"
         in: "header"
