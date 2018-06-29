@@ -1,6 +1,18 @@
+buildscript {
+  ext {
+    springBootVersion = '2.0.2.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
 plugins {
-    id 'org.springframework.boot' version '2.0.2.RELEASE'
-    id 'org.hidetake.swagger.generator' version '2.12.0'
+  id 'org.springframework.boot' version '2.0.2.RELEASE'
+  id 'org.hidetake.swagger.generator' version '2.12.0'
 }
 
 defaultTasks 'clean', 'build', 'jar'
@@ -10,59 +22,76 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 //apply plugin: 'org.hidetake.swagger.generator' version '2.12.0'
 
 sourceCompatibility = 1.8
 
 repositories {
-    jcenter()
-    mavenCentral()
+  jcenter()
+  mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+  compile 'org.codehaus.groovy:groovy-all:2.3.11'
 
-    swaggerCodegen 'io.swagger:swagger-codegen-cli:2.3.1'
-    swaggerUI 'org.webjars:swagger-ui:3.10.0'
-    compile 'io.springfox:springfox-swagger2:2.7.0'
+  swaggerCodegen 'io.swagger:swagger-codegen-cli:2.3.1'
+  swaggerUI 'org.webjars:swagger-ui:3.10.0'
 
-    compile 'org.springframework.boot:spring-boot-starter-web:2.0.2.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-tomcat:2.0.2.RELEASE'
-    compile 'io.springfox:springfox-swagger2:2.7.0'
-    compile 'io.springfox:springfox-swagger-ui:2.7.0'
+  compile 'io.springfox:springfox-swagger2:2.7.0'
 
-    testCompile 'junit:junit:4.12'
+  compile 'org.springframework.boot:spring-boot-starter-web:2.0.2.RELEASE'
+  compile 'org.springframework.boot:spring-boot-starter-tomcat:2.0.2.RELEASE'
+  compile 'io.springfox:springfox-swagger2:2.7.0'
+  compile 'io.springfox:springfox-swagger-ui:2.7.0'
+
+  compile('org.springframework.boot:spring-boot-starter-cache')
+  compile('org.springframework.boot:spring-boot-starter-data-jpa')
+  compile('org.springframework.boot:spring-boot-starter-jdbc')
+  compile('org.springframework.boot:spring-boot-starter-security')
+  compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+  compile('org.springframework.boot:spring-boot-starter-validation')
+  runtime('org.springframework.boot:spring-boot-devtools')
+  runtime('com.h2database:h2')
+  runtime('mysql:mysql-connector-java')
+
+  // https://mvnrepository.com/artifact/io.swagger/swagger-annotations
+  compile group: 'io.swagger', name: 'swagger-annotations', version: '1.5.20'
+  compile 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
+
+  testCompile 'junit:junit:4.12'
 }
 
 swaggerSources {
-    petstore {
-        inputFile = file('src/main/resources/swagger/v1.yaml')
-        code {
-            language = 'spring'
-            configFile = file('src/main/resources/swagger/config.json')
-            outputDir = file('output')
-            // Generate only models and controllers
-            components = ['models', 'apis']
-            dependsOn validation
+  petstore {
+    inputFile = file('src/main/resources/swagger/v1.yaml')
+    code {
+      language = 'spring'
+      configFile = file('src/main/resources/swagger/config.json')
+      outputDir = file('output')
+      wipeOutputDir = false
+      // Generate only models and controllers
+      components = ['models', 'apis']
+      dependsOn validation
 
-            doLast {
-                copy {
-                    from "${code.outputDir}/src/main/java/io/github/yuokada/swagger/demoapi"
-                    // from 'output/src/main/java/io/github/yuokada/swagger/demoapi/impl/*.java'
-                    into "src/main/java/io/github/yuokada/swagger/demoapi"
-                }
-            }
+      doLast {
+        copy {
+          from "${code.outputDir}/src/main/java/io/github/yuokada/swagger/demoapi"
+          // from 'output/src/main/java/io/github/yuokada/swagger/demoapi/impl/*.java'
+          into "src/main/java/io/github/yuokada/swagger/demoapi"
         }
-        ui {
-            doLast {
-                copy {
-                    from 'index.html'
-                    into outputDir
-                }
-            }
-        }
+      }
     }
+    ui {
+      doLast {
+        copy {
+          from 'index.html'
+          into outputDir
+        }
+      }
+    }
+  }
 }
 
 // ref: https://github.com/int128/gradle-swagger-generator-plugin
