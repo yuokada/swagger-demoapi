@@ -20,6 +20,12 @@ tags:
 schemes:
 - "https"
 - "http"
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
 paths:
   /pet:
     post:
@@ -30,9 +36,7 @@ paths:
       operationId: "addPet"
       consumes:
       - "application/json"
-      - "application/xml"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - in: "body"
@@ -56,9 +60,7 @@ paths:
       operationId: "updatePet"
       consumes:
       - "application/json"
-      - "application/xml"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - in: "body"
@@ -86,7 +88,6 @@ paths:
       description: "Multiple status values can be provided with comma separated strings"
       operationId: "findPetsByStatus"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "status"
@@ -123,7 +124,6 @@ paths:
       description: "Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing."
       operationId: "findPetsByTags"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "tags"
@@ -156,7 +156,6 @@ paths:
       description: "Returns a single pet"
       operationId: "getPetById"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "petId"
@@ -184,9 +183,6 @@ paths:
       operationId: "updatePetWithForm"
       consumes:
       - "application/x-www-form-urlencoded"
-      produces:
-      - "application/xml"
-      - "application/json"
       parameters:
       - name: "petId"
         in: "path"
@@ -217,9 +213,6 @@ paths:
       summary: "Deletes a pet"
       description: ""
       operationId: "deletePet"
-      produces:
-      - "application/xml"
-      - "application/json"
       parameters:
       - name: "api_key"
         in: "header"
@@ -303,8 +296,6 @@ definitions:
       complete:
         type: "boolean"
         default: false
-    xml:
-      name: "Order"
   Category:
     type: "object"
     properties:
@@ -313,8 +304,6 @@ definitions:
         format: "int64"
       name:
         type: "string"
-    xml:
-      name: "Category"
   User:
     type: "object"
     properties:
@@ -337,8 +326,6 @@ definitions:
         type: "integer"
         format: "int32"
         description: "User Status"
-    xml:
-      name: "User"
   Tag:
     type: "object"
     properties:
@@ -347,8 +334,6 @@ definitions:
         format: "int64"
       name:
         type: "string"
-    xml:
-      name: "Tag"
   Pet:
     type: "object"
     required:
@@ -365,16 +350,10 @@ definitions:
         example: "doggie"
       photoUrls:
         type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
         items:
           type: "string"
       tags:
         type: "array"
-        xml:
-          name: "tag"
-          wrapped: true
         items:
           $ref: "#/definitions/Tag"
       status:
@@ -384,8 +363,6 @@ definitions:
         - "available"
         - "pending"
         - "sold"
-    xml:
-      name: "Pet"
   AppResponse:
     type: "object"
     properties:
