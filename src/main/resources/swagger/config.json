@@ -8,7 +8,7 @@
   "invokerPackage": "io.github.yuokada.swagger.demoapi",
 
   "library": "spring-boot",
-  "serializableModel": true,
+  "serializableModel": false,
   "hideGenerationTimestamp": true,
   "dateLibrary": "java8",
   "useOptional": true,
