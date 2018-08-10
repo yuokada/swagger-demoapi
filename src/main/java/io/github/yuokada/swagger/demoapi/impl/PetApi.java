@@ -30,7 +30,6 @@ import javax.validation.constraints.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-29T20:52:26.711+09:00")
 
 @Api(value = "pet", description = "the pet API")
 public interface PetApi {
@@ -181,7 +180,7 @@ public interface PetApi {
         @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/pet/{petId}",
         produces = { "application/json" }, 
-        consumes = { "application/x-www-form-urlencoded" },
+        consumes = { "application/json" },
         method = RequestMethod.POST)
     default ResponseEntity<Void> updatePetWithForm(@ApiParam(value = "ID of pet that needs to be updated",required=true) @PathVariable("petId") Long petId,@ApiParam(value = "Updated name of the pet") @RequestParam(value="name", required=false)  String name,@ApiParam(value = "Updated status of the pet") @RequestParam(value="status", required=false)  String status) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
@@ -197,7 +196,7 @@ public interface PetApi {
         @ApiResponse(code = 200, message = "successful operation", response = AppResponse.class) })
     @RequestMapping(value = "/pet/{petId}/uploadImage",
         produces = { "application/json" }, 
-        consumes = { "multipart/form-data" },
+        consumes = { "application/json" },
         method = RequestMethod.POST)
     default ResponseEntity<AppResponse> uploadFile(@ApiParam(value = "ID of pet to update",required=true) @PathVariable("petId") Long petId,@ApiParam(value = "Additional data to pass to server") @RequestParam(value="additionalMetadata", required=false)  String additionalMetadata,@ApiParam(value = "file detail") @Valid @RequestPart("file") MultipartFile file) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
