@@ -1,12 +1,15 @@
 {
   "groupId": "io.github.yuokada.swagger",
   "artifactId": "demoapi",
-  "invokerPackage": "io.github.yuokada.swagger.demoapi",
+
   "apiPackage": "io.github.yuokada.swagger.demoapi.impl",
-  "modelPackage": "io.github.yuokada.swagger.demoapi.model",
   "configPackage": "io.github.yuokada.swagger.demoapi.config",
-  "serializableModel": false,
+  "modelPackage": "io.github.yuokada.swagger.demoapi.model",
+  "invokerPackage": "io.github.yuokada.swagger.demoapi",
+
   "library": "spring-boot",
+  "serializableModel": true,
+  "hideGenerationTimestamp": true,
   "dateLibrary": "java8",
   "useOptional": true,
   "java8": true
