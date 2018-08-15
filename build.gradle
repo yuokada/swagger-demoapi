@@ -75,7 +75,7 @@ swaggerSources {
       outputDir = file('output')
       wipeOutputDir = false
       // Generate only models and controllers
-      components = ['models', 'apis']
+      // components = ['models', 'apis']
       dependsOn validation
 
       doLast {

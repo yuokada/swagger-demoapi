@@ -11,7 +11,7 @@ info:
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 
 host: "tweet.swagger.io"
-basePath: "/api/v1"
+basePath: "/api/"
 
 tags:
 - name: "tweet"
@@ -45,6 +45,9 @@ paths:
         schema:
           $ref: "#/definitions/Tweet"
       responses:
+        # https://swagger.io/docs/specification/adding-examples/
+        200:
+          description: Success
         405:
           description: "Invalid input"
   /tweet/{tweetId}:
@@ -121,10 +124,6 @@ definitions:
       name:
         type: "string"
         example: "doggie"
-      photoUrls:
-        type: "array"
-        items:
-          type: "string"
       status:
         type: "string"
         description: "tweet status in the store"

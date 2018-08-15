@@ -14,7 +14,7 @@ window.swaggerSpec={
     }
   },
   "host" : "tweet.swagger.io",
-  "basePath" : "/api/v1",
+  "basePath" : "/api/",
   "tags" : [ {
     "name" : "tweet",
     "description" : "Everything about your Tweets",
@@ -41,6 +41,9 @@ window.swaggerSpec={
           }
         } ],
         "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
           "405" : {
             "description" : "Invalid input"
           }
@@ -136,12 +139,6 @@ window.swaggerSpec={
         "name" : {
           "type" : "string",
           "example" : "doggie"
-        },
-        "photoUrls" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
         },
         "status" : {
           "type" : "string",

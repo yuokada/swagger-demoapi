@@ -48,6 +48,7 @@ public interface TweetApi {
 
     @ApiOperation(value = "Add a new tweet to the store", nickname = "addTweet", notes = "", tags={ "tweet", })
     @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Success"),
         @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/tweet",
         method = RequestMethod.POST)
@@ -88,7 +89,7 @@ public interface TweetApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"photoUrls\" : [ \"photoUrls\", \"photoUrls\" ],  \"name\" : \"doggie\",  \"id\" : 0,  \"status\" : \"available\"}", Tweet.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"name\" : \"doggie\",  \"id\" : 0,  \"status\" : \"available\"}", Tweet.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
