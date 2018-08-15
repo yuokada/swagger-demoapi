@@ -4,7 +4,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.github.yuokada.swagger.demoapi.model.Category;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -21,9 +20,6 @@ import javax.validation.constraints.*;
 public class Tweet   {
   @JsonProperty("id")
   private Long id = null;
-
-  @JsonProperty("category")
-  private Category category = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -86,27 +82,6 @@ public class Tweet   {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public Tweet category(Category category) {
-    this.category = category;
-    return this;
-  }
-
-  /**
-   * Get category
-   * @return category
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public Category getCategory() {
-    return category;
-  }
-
-  public void setCategory(Category category) {
-    this.category = category;
   }
 
   public Tweet name(String name) {
@@ -189,7 +164,6 @@ public class Tweet   {
     }
     Tweet tweet = (Tweet) o;
     return Objects.equals(this.id, tweet.id) &&
-        Objects.equals(this.category, tweet.category) &&
         Objects.equals(this.name, tweet.name) &&
         Objects.equals(this.photoUrls, tweet.photoUrls) &&
         Objects.equals(this.status, tweet.status);
@@ -197,7 +171,7 @@ public class Tweet   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, category, name, photoUrls, status);
+    return Objects.hash(id, name, photoUrls, status);
   }
 
   @Override
@@ -206,7 +180,6 @@ public class Tweet   {
     sb.append("class Tweet {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    photoUrls: ").append(toIndentedString(photoUrls)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");

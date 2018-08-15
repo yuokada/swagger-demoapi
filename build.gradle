@@ -65,8 +65,10 @@ dependencies {
 }
 
 swaggerSources {
-  petstore {
-    inputFile = file('src/main/resources/swagger/v1.yaml')
+  tweet {
+//    inputFile = file('src/main/resources/swagger/v1.yaml')
+    inputFile = file('src/main/resources/swagger/tweet.yaml')
+
     code {
       language = 'spring'
       configFile = file('src/main/resources/swagger/config.json')
@@ -85,32 +87,7 @@ swaggerSources {
       }
     }
     ui {
-      doLast {
-        copy {
-          from 'index.html'
-          into outputDir
-        }
-      }
-    }
-  }
-  tweet {
-    inputFile = file('src/main/resources/swagger/tweet.yaml')
-    code {
-      language = 'spring'
-      configFile = file('src/main/resources/swagger/config.json')
-      outputDir = file('output')
-      wipeOutputDir = false
-      // Generate only models and controllers
-      components = ['models', 'apis']
-      dependsOn validation
-
-      doLast {
-        copy {
-          from "${code.outputDir}/src/main/java/io/github/yuokada/swagger/demoapi"
-          // from 'output/src/main/java/io/github/yuokada/swagger/demoapi/impl/*.java'
-          into "src/main/java/io/github/yuokada/swagger/demoapi"
-        }
-      }
+      outputDir = file("docs")
     }
   }
 }
