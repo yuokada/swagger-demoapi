@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.github.yuokada.swagger.demoapi.model.Category;
-import io.github.yuokada.swagger.demoapi.model.Tag;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -15,11 +14,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Pet
+ * Tweet
  */
 @Validated
 
-public class Pet   {
+public class Tweet   {
   @JsonProperty("id")
   private Long id = null;
 
@@ -33,12 +32,8 @@ public class Pet   {
   @Valid
   private List<String> photoUrls = null;
 
-  @JsonProperty("tags")
-  @Valid
-  private List<Tag> tags = null;
-
   /**
-   * pet status in the store
+   * tweet status in the store
    */
   public enum StatusEnum {
     AVAILABLE("available"),
@@ -73,7 +68,7 @@ public class Pet   {
   @JsonProperty("status")
   private StatusEnum status = null;
 
-  public Pet id(Long id) {
+  public Tweet id(Long id) {
     this.id = id;
     return this;
   }
@@ -93,7 +88,7 @@ public class Pet   {
     this.id = id;
   }
 
-  public Pet category(Category category) {
+  public Tweet category(Category category) {
     this.category = category;
     return this;
   }
@@ -114,7 +109,7 @@ public class Pet   {
     this.category = category;
   }
 
-  public Pet name(String name) {
+  public Tweet name(String name) {
     this.name = name;
     return this;
   }
@@ -135,12 +130,12 @@ public class Pet   {
     this.name = name;
   }
 
-  public Pet photoUrls(List<String> photoUrls) {
+  public Tweet photoUrls(List<String> photoUrls) {
     this.photoUrls = photoUrls;
     return this;
   }
 
-  public Pet addPhotoUrlsItem(String photoUrlsItem) {
+  public Tweet addPhotoUrlsItem(String photoUrlsItem) {
     if (this.photoUrls == null) {
       this.photoUrls = new ArrayList<>();
     }
@@ -163,45 +158,16 @@ public class Pet   {
     this.photoUrls = photoUrls;
   }
 
-  public Pet tags(List<Tag> tags) {
-    this.tags = tags;
-    return this;
-  }
-
-  public Pet addTagsItem(Tag tagsItem) {
-    if (this.tags == null) {
-      this.tags = new ArrayList<>();
-    }
-    this.tags.add(tagsItem);
-    return this;
-  }
-
-  /**
-   * Get tags
-   * @return tags
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public List<Tag> getTags() {
-    return tags;
-  }
-
-  public void setTags(List<Tag> tags) {
-    this.tags = tags;
-  }
-
-  public Pet status(StatusEnum status) {
+  public Tweet status(StatusEnum status) {
     this.status = status;
     return this;
   }
 
   /**
-   * pet status in the store
+   * tweet status in the store
    * @return status
   **/
-  @ApiModelProperty(value = "pet status in the store")
+  @ApiModelProperty(value = "tweet status in the store")
 
 
   public StatusEnum getStatus() {
@@ -221,30 +187,28 @@ public class Pet   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Pet pet = (Pet) o;
-    return Objects.equals(this.id, pet.id) &&
-        Objects.equals(this.category, pet.category) &&
-        Objects.equals(this.name, pet.name) &&
-        Objects.equals(this.photoUrls, pet.photoUrls) &&
-        Objects.equals(this.tags, pet.tags) &&
-        Objects.equals(this.status, pet.status);
+    Tweet tweet = (Tweet) o;
+    return Objects.equals(this.id, tweet.id) &&
+        Objects.equals(this.category, tweet.category) &&
+        Objects.equals(this.name, tweet.name) &&
+        Objects.equals(this.photoUrls, tweet.photoUrls) &&
+        Objects.equals(this.status, tweet.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, category, name, photoUrls, tags, status);
+    return Objects.hash(id, category, name, photoUrls, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Pet {\n");
+    sb.append("class Tweet {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    photoUrls: ").append(toIndentedString(photoUrls)).append("\n");
-    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
