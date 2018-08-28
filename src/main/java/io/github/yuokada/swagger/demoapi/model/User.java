@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -12,9 +13,9 @@ import javax.validation.constraints.*;
 /**
  * User
  */
-@Validated
 
-public class User   {
+@Validated
+public class User {
   @JsonProperty("id")
   private Long id = null;
 
@@ -23,6 +24,8 @@ public class User   {
 
   @JsonProperty("userStatus")
   private Integer userStatus = null;
+
+
 
   public User id(Long id) {
     this.id = id;
