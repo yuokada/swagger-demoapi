@@ -141,3 +141,11 @@ definitions:
         type: "string"
       message:
         type: "string"
+  ErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"

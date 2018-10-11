@@ -1,12 +1,17 @@
 package io.github.yuokada.swagger.demoapi.controllers;
 
+import io.github.yuokada.swagger.demoapi.model.ErrorResponse;
+import io.github.yuokada.swagger.demoapi.model.ResourceNotFoundException;
 import io.github.yuokada.swagger.demoapi.model.User;
 import io.github.yuokada.swagger.demoapi.services.UserService;
 import java.util.ArrayList;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.SyntaxException;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,9 +28,16 @@ public class UserControler {
     }
 
     @GetMapping
-    public static ArrayList<User> getUsers(){
-        return new ArrayList<User>() {
-        };
+    public static ArrayList<User> getUsers(@RequestParam("query") String query)
+        throws ResourceNotFoundException{
+        if (query.equals("exception")){
+            //     public static class ResourceNotFoundException extends RuntimeException {
+            //        public ResourceNotFoundException() {
+            //            super("resource not found");
+            //        }
+            throw new ResourceNotFoundException("Foo is not found.");
+        }
+        return new ArrayList<User>() {};
     }
 
     @GetMapping("{name}")
