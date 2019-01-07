@@ -16,3 +16,101 @@ You can view the api documentation in swagger-ui by pointing to
 http://localhost:8080/  
 
 Change default port value in application.properties
+
+## Language
+
+### Kotlin Server
+
+```text
+$ swagger-codegen generate -l kotlin-server \
+  -i src/main/resources/swagger/v1.yaml \
+  -c src/main/resources/swagger/kotlin-server.json  \
+  -o src/main/kotlin
+```
+
+```bash
+$ swagger-codegen config-help -l kotlin-server
+21:38:16.188 [main] DEBUG io.swagger.codegen.v3.cli.SwaggerCodegen - there are not options for command 'langs'
+21:38:16.191 [main] DEBUG io.swagger.codegen.v3.cli.SwaggerCodegen - there are not options for command 'version'
+
+CONFIG OPTIONS
+	sourceFolder
+	    source folder for generated code (Default: src/main/kotlin)
+
+	packageName
+	    Generated artifact package name (e.g. io.swagger).
+
+	groupId
+	    Generated artifact package's organization (i.e. maven groupId). (Default: io.swagger)
+
+	artifactId
+	    Generated artifact id (name of jar).
+
+	artifactVersion
+	    Generated artifact's package version. (Default: 1.0.0)
+
+	enumPropertyNaming
+	    Naming convention for enum properties: 'camelCase', 'PascalCase', 'snake_case', 'UPPERCASE', and 'original' (Default: camelCase)
+
+	library
+	    library template (sub-template) to use (Default: ktor)
+	        ktor - ktor framework
+
+	featureAutoHead
+	    Automatically provide responses to HEAD requests for existing routes that have the GET verb defined. (Default: true)
+
+	featureConditionalHeaders
+	    Avoid sending content if client already has same content, by checking ETag or LastModified properties. (Default: false)
+
+	featureHSTS
+	    Avoid sending content if client already has same content, by checking ETag or LastModified properties. (Default: true)
+
+	featureCORS
+	    Ktor by default provides an interceptor for implementing proper support for Cross-Origin Resource Sharing (CORS). See enable-cors.org. (Default: false)
+
+	featureCompression
+	    Adds ability to compress outgoing content using gzip, deflate or custom encoder and thus reduce size of the response. (Default: true)
+
+
+```
+
+### Kotlin Client
+
+```text
+$ swagger-codegen generate \ 
+  -l kotlin-client -i src/main/resources/swagger/v1.yaml \
+  -c src/main/resources/swagger/kotlin-client.json \
+  -o src/main/kotlin
+```
+
+```
+$ swagger-codegen config-help -l kotlin-client
+21:39:01.444 [main] DEBUG io.swagger.codegen.v3.cli.SwaggerCodegen - there are not options for command 'langs'
+21:39:01.453 [main] DEBUG io.swagger.codegen.v3.cli.SwaggerCodegen - there are not options for command 'version'
+
+CONFIG OPTIONS
+	sourceFolder
+	    source folder for generated code (Default: src/main/kotlin)
+
+	packageName
+	    Generated artifact package name (e.g. io.swagger).
+
+	groupId
+	    Generated artifact package's organization (i.e. maven groupId). (Default: io.swagger)
+
+	artifactId
+	    Generated artifact id (name of jar).
+
+	artifactVersion
+	    Generated artifact's package version. (Default: 1.0.0)
+
+	enumPropertyNaming
+	    Naming convention for enum properties: 'camelCase', 'PascalCase', 'snake_case', 'UPPERCASE', and 'original' (Default: camelCase)
+
+	dateLibrary
+	    Option. Date library to use
+	        string - String
+	        java8 - Java 8 native JSR310
+	        threetenbp - Threetenbp
+
+```
