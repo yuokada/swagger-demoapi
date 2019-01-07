@@ -12,7 +12,7 @@ buildscript {
 
 plugins {
   id 'org.springframework.boot' version '2.0.2.RELEASE'
-  id 'org.hidetake.swagger.generator' version '2.12.0'
+  id 'org.hidetake.swagger.generator' version '2.16.0'
 }
 
 defaultTasks 'clean', 'build', 'jar'
@@ -36,7 +36,9 @@ repositories {
 dependencies {
   compile 'org.codehaus.groovy:groovy-all:2.3.11'
 
-  swaggerCodegen 'io.swagger:swagger-codegen-cli:2.3.1'
+  // swaggerCodegen 'io.swagger:swagger-codegen-cli:2.3.1'
+  swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.3'
+
   swaggerUI 'org.webjars:swagger-ui:3.10.0'
 
   compile 'io.springfox:springfox-swagger2:2.7.0'
@@ -66,7 +68,6 @@ dependencies {
 
 swaggerSources {
   tweet {
-//    inputFile = file('src/main/resources/swagger/v1.yaml')
     inputFile = file('src/main/resources/swagger/tweet.yaml')
 
     code {
@@ -88,6 +89,24 @@ swaggerSources {
     }
     ui {
       outputDir = file("docs")
+    }
+  }
+  ktweet {
+    inputFile = file('src/main/resources/swagger/tweet.yaml')
+
+    code {
+      language = 'kotlin-server'
+      configFile = file('src/main/resources/swagger/kotlin-server.json')
+      outputDir = file('output')
+      wipeOutputDir = false
+      dependsOn validation
+
+      doLast {
+        copy {
+          from "${code.outputDir}/src/main/kotlin/io/github/yuokada/swagger/demoapi"
+          into "src/main/kotlin/io/github/yuokada/swagger/demoapi"
+        }
+      }
     }
   }
 }
