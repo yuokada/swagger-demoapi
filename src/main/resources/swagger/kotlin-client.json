@@ -1,0 +1,7 @@
+{
+  "groupId": "io.github.yuokada.swagger",
+  "artifactId": "demoapi-client",
+  "artifactVersion": "0.1.0",
+
+  "dateLibrary": "java8"
+}

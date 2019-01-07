@@ -1,0 +1,7 @@
+{
+  "groupId": "io.github.yuokada.swagger",
+  "artifactId": "demoapi",
+  "artifactVersion": "0.1.0",
+
+  "featureHSTS": false
+}
