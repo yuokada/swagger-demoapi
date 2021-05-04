@@ -1,6 +1,6 @@
 buildscript {
   ext {
-    springBootVersion = '2.0.2.RELEASE'
+    springBootVersion = '2.0.9.RELEASE'
   }
   repositories {
     mavenCentral()
@@ -11,7 +11,7 @@ buildscript {
 }
 
 plugins {
-  id 'org.springframework.boot' version '2.0.2.RELEASE'
+  id 'org.springframework.boot' version "${springBootVersion}"
   id 'org.hidetake.swagger.generator' version '2.16.0'
 }
 
@@ -24,12 +24,11 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-//apply plugin: 'org.hidetake.swagger.generator' version '2.12.0'
 
+targetCompatibility = 1.8
 sourceCompatibility = 1.8
 
 repositories {
-  jcenter()
   mavenCentral()
 }
 
